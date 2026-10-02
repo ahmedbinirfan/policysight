@@ -8,7 +8,7 @@ class Settings(BaseSettings):
 
     openai_api_key: str = ""
     openai_model: str = "gpt-4o-mini"
-    support_floor: float = 0.15
+    support_floor: float = 0.35
     port: int = 8000
     # Repo root = parents[2] from src/policysight/config.py
     root: Path = Path(__file__).resolve().parents[2]

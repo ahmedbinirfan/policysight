@@ -99,6 +99,7 @@ def retrieve(
 def support_score(question: str, candidates: Sequence[tuple[Chunk, float]]) -> float:
     if not candidates:
         return 0.0
+    # Best candidate score is already query-token overlap in [0, 1].
     return max(s for _, s in candidates)
 
 
@@ -109,6 +110,7 @@ def answer_from_spans(
 ) -> Dict:
     """Cite-or-refuse stub: no LLM — answer is the best span if above floor."""
     support = support_score(question, candidates)
+    # Require a meaningful overlap; stray keyword hits must not invent answers.
     if support < floor or not candidates:
         return {
             "answer": None,
